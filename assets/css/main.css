@@ -1,0 +1,176 @@
+@font-face {
+    font-family: yg-jalnan;
+    src: url(https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff) format("woff");
+    font-weight: 400;
+    font-style: normal
+}
+
+*{
+    font-family:yg-jalnan;
+}
+
+body{
+    margin:0;
+    padding:0;
+}
+
+#brand_logo{
+    border: none;
+    width: 100px;
+    margin-left: 50px;
+}
+
+.transition-img{
+    height: 70vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.transition{
+    animation: fade-in 2s;
+    width: 100%;
+    min-height: 70vh;
+    z-index: 1;
+}
+
+@keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+
+.main-text{
+    position: absolute;
+    z-index: 2;
+    color: white;
+
+    top:20%;
+    font-size: 5vw;
+    padding: 10vh 10vw 0;
+}
+
+.title{
+    color:gold
+}
+
+.location-trip{
+    height: 20vh;
+}
+
+.location-trip-card{
+    padding: 8px;
+}
+
+/* infinite 슬라이드 */
+
+.slider-div{
+    height: 100%;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+  .slider {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    align-items: center;
+    display: flex;
+    padding: 2rem 0;
+    overflow: hidden;
+  }
+
+.slide .card{
+    margin: 20px;
+    width: 330px;
+    height: 130px;
+    overflow:hidden;
+    border: none;
+    box-shadow: 4px 5px 23px -4px rgba(133,107,107,0.7);
+    -webkit-box-shadow: 4px 5px 23px -4px rgba(133,107,107,0.7);
+    -moz-box-shadow: 4px 5px 23px -4px rgba(133,107,107,0.7);
+    font-size:20px;
+}
+
+.slide .card:hover{
+    transform: scale(1.2);
+    opacity: 0.8;
+    font-size: 60px;
+}
+
+.slide .card-img{
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.slide {
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.slide{
+animation: slideshow 20s linear infinite;
+}
+
+@keyframes slideshow {
+from { transform: translateX(0%);}
+to { transform: translateX(-100%);}
+}
+
+/* 추가, 변경 */
+
+.slide .card{
+    margin: 20px;
+    width: 330px;
+    height: 130px;
+    overflow:hidden;
+    border: none;
+    box-shadow: 4px 5px 23px -4px rgba(133,107,107,0.7);
+    -webkit-box-shadow: 4px 5px 23px -4px rgba(133,107,107,0.7);
+    -moz-box-shadow: 4px 5px 23px -4px rgba(133,107,107,0.7);
+    font-size:20px;
+    cursor: pointer;
+}
+
+
+  .footer-txt{
+    color:gray;
+  }
+
+  footer .img-thumbnail{
+    height: 70px;
+    border: none;
+  }
+
+  .location-trip-card{
+    padding: 8px;
+    border: none;
+}
+
+.main-text{
+  position: absolute;
+  z-index: 2;
+  color: white;
+
+  top:20%;
+  font-size: 5vw;
+  padding: 10vh 10vw 0;
+  text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+}
+
+.nonLogined{
+    display: none;
+}
+.Logined{
+    display: none;
+}

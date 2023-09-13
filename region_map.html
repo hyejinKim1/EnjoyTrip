@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link href="assets/css/region.css" rel="stylesheet" />
+    <title>EnjoyTrip</title>
+    <link rel="icon" href="./assets/img/logo.ico" type="image/x-icon">
+  </head>
+  <body>
+    <!-- TODO: 고정 navbar구현 -->
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img
+            src="./assets/img/logo.png"
+            class="img-thumbnail bg-light"
+            alt="Cinque Terre"
+            id="brand_logo"
+          />
+        </a>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="region_map.html">지역별 여행지</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">나의 여행계획</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">핫플자랑하기</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">여행정보공유</a>
+          </li>
+          <ul class="navbar-nav me-5 nonLogined">
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signUp"
+                >회원가입</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signIn"
+                >로그인</a
+              >
+            </li>
+          </ul>
+          <ul class="navbar-nav me-5 Logined">
+            <li class="nav-item">
+              <a class="nav-link" href="mypage.html">마이페이지</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="javascript:logout();">로그아웃</a>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- 상단 제목, 필터 start-->
+    <section class="container">
+      <div class="text-center">
+        <h1>우리동네 구석구석!</h1>
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+          <select class="form-select" name="sido" id="sido"></select>
+        </div>
+        <div class="col-4">
+          <select class="form-select" name="gugun" id="gugun">
+            <option value="">구군선택</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <select class="form-select" name="dong" id="dong">
+            <option value="">동선택</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- checkbox select -->
+      <div>
+        <div class="row mt-3">
+          <div class="col-2">
+            <div class="checkbox">
+              <label> <input type="checkbox" class="check" id="checkAll" />모두선택</label>
+            </div>
+          </div>
+          <div class="col-10">
+            <div class="d-flex">
+              <div class="form-check">
+                <input
+                  class="form-check-input check"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault"
+                />
+                <label class="form-check-label" for="flexCheckDefault">관광지</label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input check"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault"
+                />
+                <label class="form-check-label" for="flexCheckDefault">문화시설</label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input check"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault"
+                />
+                <label class="form-check-label" for="flexCheckDefault">행사 / 공연 / 축제</label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input check"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault"
+                />
+                <label class="form-check-label" for="flexCheckDefault">여행코스</label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input check"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault"
+                />
+                <label class="form-check-label" for="flexCheckDefault">레포츠</label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input check"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault"
+                />
+                <label class="form-check-label" for="flexCheckDefault">숙박</label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input check"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault"
+                />
+                <label class="form-check-label" for="flexCheckDefault">쇼핑</label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input check"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault"
+                />
+                <label class="form-check-label" for="flexCheckDefault">음식점</label>
+              </div>
+              <button class="btn btn-primary ms-3" onclick="searchPlaces()">검색</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 상단 제목, 필터 end-->
+
+    <!-- 지도 start -->
+    <section class="mt-5">
+      <div class="map_wrap">
+        <div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden"></div>
+
+        <div id="menu_wrap" class="bg_white">
+
+          <ul id="placesList"></ul>
+          <div id="pagination"></div>
+        </div>
+      </div>
+    </section>
+    <!-- 지도 end -->
+
+    <!-- 관광지 정보 start -->
+    <section>
+      <div class="row">
+        <div class="slider-div">
+          <div class="wrapper">
+            <div class="slider">
+              <div class="slide slide1">
+                <div class="card">
+                  <img src="assets/img/profile.png" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+                      Some quick example text to build on the card title and make up the bulk of the
+                      card's content.
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="assets/img/profile.png" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+                      Some quick example text to build on the card title and make up the bulk of the
+                      card's content.
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="assets/img/profile.png" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+                      Some quick example text to build on the card title and make up the bulk of the
+                      card's content.
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="assets/img/profile.png" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+                      Some quick example text to build on the card title and make up the bulk of the
+                      card's content.
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="assets/img/profile.png" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+                      Some quick example text to build on the card title and make up the bulk of the
+                      card's content.
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="assets/img/profile.png" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+                      Some quick example text to build on the card title and make up the bulk of the
+                      card's content.
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+              </div>
+              <div class="slide slide2">
+                <div class="card">
+                  <img src="assets/img/profile.png" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+                      Some quick example text to build on the card title and make up the bulk of the
+                      card's content.
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="assets/img/profile.png" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+                      Some quick example text to build on the card title and make up the bulk of the
+                      card's content.
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="assets/img/profile.png" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+                      Some quick example text to build on the card title and make up the bulk of the
+                      card's content.
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="assets/img/profile.png" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+                      Some quick example text to build on the card title and make up the bulk of the
+                      card's content.
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="assets/img/profile.png" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+                      Some quick example text to build on the card title and make up the bulk of the
+                      card's content.
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="assets/img/profile.png" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+                      Some quick example text to build on the card title and make up the bulk of the
+                      card's content.
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 관광지 정보 end -->
+
+    <!-- modal -->
+    <!-- 회원가입 모달 -->
+    <div
+      class="modal fade"
+      id="signUp"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">회원가입</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal_body">
+            <div class="container ps-5 pe-5">
+              <form action="">
+                <div class="row mt-3">
+                  <label for="signUp_name" class="form-label">이름:</label>
+                  <input
+                    type="text"
+                    class="form-control mt-0"
+                    id="signUp_name"
+                    name="signUp_name"
+                    placeholder="이름 입력"
+                  />
+                </div>
+                <div class="row mt-3">
+                  <label for="signUp_id" class="form-label">아이디:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="signUp_id"
+                    name="signUp_id"
+                    placeholder="아이디 입력"
+                  />
+                </div>
+                <div class="row mt-3">
+                  <label for="signUp_pw" class="form-label">비밀번호:</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="signUp_pw"
+                    name="signUp_pw"
+                    placeholder="비밀번호 입력"
+                  />
+                </div>
+                <div class="row mt-3">
+                  <label for="signUp_pw_config" class="form-label">비밀번호 확인:</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="signUp_pw_config"
+                    name="signUp_pw_config"
+                    placeholder="비밀번호 확인"
+                  />
+                </div>
+                <div class="row mt-3">
+                  <label for="signUp_email" class="form-label">이메일:</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="signUp_email"
+                    name="signUp_email"
+                    placeholder="이메일 입력"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="btn-poll-create"
+              class="btn btn-primary btn-sm"
+              onclick="javascript:makeUser();"
+            >
+              회원가입
+            </button>
+            <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal">
+              초기화
+            </button>
+            <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal">
+              닫기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 로그인 모달 -->
+    <div
+      class="modal fade"
+      id="signIn"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">로그인</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal_body">
+            <div class="container mb-5 ps-5 pe-5">
+              <form action="">
+                <div class="row mt-4">
+                  <label for="signIn_id" class="form-label">아이디:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="signIn_id"
+                    name="signIn_id"
+                    placeholder="아이디 입력"
+                  />
+                </div>
+                <div class="row mt-4">
+                  <label for="signIn_pw" class="form-label">비밀번호:</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="signIn_pw"
+                    name="signIn_pw"
+                    placeholder="비밀번호 입력"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="btn-poll-create"
+              class="btn btn-primary btn-sm"
+              onclick="javascript:login();"
+            >
+              로그인
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"
+  ></script>
+
+  <script
+    type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=384f5ff7c10a90767f8f86d57f6fdac8&libraries=services"
+  ></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
+  <script type="text/javascript" src="assets/js/map.js"></script>
+  <script type="text/javascript" src="assets/js/region.js"></script>
+</html>

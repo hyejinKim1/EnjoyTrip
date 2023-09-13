@@ -1,0 +1,42 @@
+body{
+    width: 100vw;
+    height: 100vh;
+    background-color:rgb(235, 235, 235) !important;
+}
+
+#brand_logo{
+    border: none;
+    width: 100px;
+    margin-left: 50px;
+}
+
+.main{
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.mytable-div{
+    width: 50%;
+    padding : 10px 70px;
+    margin:30px auto !important;
+    border-radius: 20px;
+    background-color: rgb(235, 235, 235);
+}
+
+.mytable{
+    border-collapse: separate;
+    border-spacing: 0 20px;
+    border-radius: 20px;
+}
+
+tr{
+    height: 3em;
+    background-color: white;
+ }
+td{
+    padding-left: 20px;
+}
+td:first-child{
+    width: 200px;
+}
